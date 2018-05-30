@@ -1,0 +1,17 @@
+---
+- name: Generate keyfile
+  command: sudo openssl rand -base64 741
+  register: output1
+  var: output1.stdout_lines
+
+- name: Update the permissions
+  file:
+    path: /etc/mongodb-keyfile
+    state: touch
+    mode: 600
+
+- name: Adding the base64 Key.
+  blockinfile:
+    path: /etc/mongodb-keyfile
+    block: |
+      "{{ output1.stdout_lines }}"

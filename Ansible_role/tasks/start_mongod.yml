@@ -1,0 +1,7 @@
+---
+- name: Starting the mongod service.
+  #service:
+  systemd:
+    name: mongod
+    state: started
+    enabled: yes

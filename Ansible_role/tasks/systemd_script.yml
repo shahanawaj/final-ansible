@@ -1,0 +1,17 @@
+---
+- name: create systemd mongodb service
+  become: yes
+  command: touch /etc/systemd/system/mongodb.service
+  args:
+    creates: etc/systemd/system/mongodb.service
+
+- name: updating the systemd mongodb.service configure
+  dest: /etc/systemd/system/mongodb.service
+  block: |
+    [Service]
+    LimitFSIZE=infinity
+    LimitCPU=infinity
+
+- name: restart mongodb
+  become: yes
+  command: systemctl restart mongod

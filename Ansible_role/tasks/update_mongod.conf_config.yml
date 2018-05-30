@@ -1,0 +1,29 @@
+---
+- name: Updating the /etc/mongod.conf file configuration.
+  become: yes
+  blockinfile:
+    dest: /etc/mongod.conf
+    marker: "# {mark} Security configuration"
+    insertafter: "#security:"
+    block: |
+      net:
+        ssl:
+          mode: requiredSSL
+          PEMKeyFile: /etc/ssl/mongodb.pem
+          CAFILE: /etc/ssl/ca.pem
+
+      setParameter:
+        enableLocalhostAuthBypass: false
+
+      systemLog.quiet: false
+      systemLog.logAppend: true
+
+      security:
+        clusterAuthMode: x509
+        authorization: "enabled"
+        javascriptEnabled: false
+
+      auditlog:
+        destination: file
+        format: JSON
+        path: data/db/auditlog.json

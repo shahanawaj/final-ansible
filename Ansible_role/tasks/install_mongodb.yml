@@ -1,0 +1,10 @@
+---
+- name: Installing mongodb-v3.6.4
+  yum:
+    name: "{{ item }}"
+  with_items:
+    - "mongodb-org-3.6.4"
+    - "mongodb-org-server-3.6.4"
+    - "mongodb-org-shell-3.6.4"
+    - "mongodb-org-mongos-3.6.4"
+    - "mongodb-org-tools-3.6.4"

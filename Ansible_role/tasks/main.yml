@@ -1,0 +1,8 @@
+---
+# tasks file for mongodb36.hardening
+- import_tasks: mongodb_yumrepo.yml
+- import_tasks: install_mongodb.yml
+- import_tasks: splunk_config.yml
+- import_tasks: start_mongod.yml
+- import_tasks: update_mongod.conf_config.yml
+- import_tasks: systemd_script.yml

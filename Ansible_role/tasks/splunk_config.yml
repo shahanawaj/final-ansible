@@ -1,0 +1,10 @@
+---
+- name: Adding splunk user to the mongo group.
+  become: yes
+  user:
+    name: splunk
+    groups: mongod
+
+- name: Set the mongodb log files to be Readonly by splunk user.
+  become: yes
+  command: setfacl -m g:splunk:rx /var/log/mongodb/mongod.log
